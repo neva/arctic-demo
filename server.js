@@ -12,9 +12,11 @@ app.use("/", arcticNode(appToken))
 
 app.get("/", (req, res) => {
 
-    if(!req.authenticated) res.authenticate(appID, callbackURL)
-
-    res.send("Hello! " + req.user.name + " | " + req.user.email + " | " + req.user.id)
+    if(req.authenticated) {
+        res.send("Hello! " + req.user.name + " | " + req.user.email + " | " + req.user.id);
+    } else {
+        res.authenticate(appID, callbackURL);
+    }
 
 })
 
